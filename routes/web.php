@@ -23,6 +23,16 @@ Route::get('/login', function () {
     ]);
 });
 
+Route::get('', function(){
+    return "Updated by";
+});
+
+Route::get('/login', function () {
+    return view('login', [
+        'title' => 'Login Page'
+    ]);
+});
+
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
