@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Mapel extends Model
 {
     use HasFactory;
+    protected $table = 'mapel';
 
-    protected $table = 'tb_mapel';
+    protected $fillable = ['nama', 'kkm', 'guru_mapel', 'kelas'];
+
 }

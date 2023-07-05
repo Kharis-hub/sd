@@ -15,7 +15,7 @@
                     <div class="row">
 
                         <div class="col-12 col-xl-6 col-lg d-none d-lg-block">
-                            <img src="img/bg_login.png" class="img-fluid img-responsive" width="540px">
+                            <img src="{{ url('/img/bg_login.png')}}" class="img-fluid img-responsive" width="540px">
                         </div>
                         <div class="col col-xl-5 col-lg-5"
                             style="display: grid; align-items: center; align-content: center;">
@@ -37,7 +37,7 @@
                             @endif
 
 
-                            <form class="user" method="POST" action="/login">
+                            <form class="user" method="POST" action="{{ route("auth.login") }}">
                                 @csrf {{--  Pengamanan --}}
                                 <div class="alert alert-info text-white text-center bg p-2" role="alert">
                                     <b>NIP</b> = Untuk Guru, <b>NIS</b> = Untuk Siswa, <b>NIK</b> = Untuk Guru Tidak
@@ -45,10 +45,10 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user"
-                                        @error('nipnis') is-invalid @enderror id="nipnis" name="nipnis"
-                                        placeholder="Masukkan NIP / NISN / NIK" value="{{ old('nipnis') }}" autofocus
+                                        @error('username') is-invalid @enderror id="username" name="username"
+                                        placeholder="Masukkan NIP / NISN / NIK" value="{{ old('username') }}" autofocus
                                         required>
-                                    @error('nipnis')
+                                    @error('username')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Mapel\StoreMapelRequest;
-use App\Models\Kelas;
-use App\Models\Mapel;
 use Illuminate\Http\Request;
 
-class MapelController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +13,20 @@ class MapelController extends Controller
      */
     public function index()
     {
-        $title = "Mata Pelajaran";
-        $mapel = Mapel::paginate(10);
-
-        return view('admin.mapel.index', [
+        $title = "Profil";
+        $user = auth()->user();
+        if ($user->isAdmin()) {
+            $user->load(['person', 'role']);
+        }
+        if ($user->isGuru()) {
+            $user->load(['guru', 'role']);
+        }
+        if ($user->isSiswa()) {
+            $user->load(['siswa', 'role']);
+        }
+        return view('admin.profile.index', [
             'title' => $title,
-            'mapel' => $mapel
+            'user' => $user
         ]);
     }
 
@@ -32,13 +37,7 @@ class MapelController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Mata Pelajaran";
-        $kelas = Kelas::all();
-
-        return view('admin.mapel.create', [
-            'title' => $title,
-            'kelas' => $kelas
-        ]);
+        //
     }
 
     /**
@@ -47,11 +46,9 @@ class MapelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMapelRequest $request)
+    public function store(Request $request)
     {
-        Mapel::create($request->all());
-
-        return redirect()->route('mapel.index')->with('success', 'mapel successfully created');
+        //
     }
 
     /**
@@ -71,16 +68,9 @@ class MapelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mapel $mapel)
+    public function edit($id)
     {
-        $title = "Edit Mapel";
-        $kelas = Kelas::all();
-
-        return view('admin.mapel.edit', [
-            'title' => $title,
-            'mapel' => $mapel,
-            'kelas' => $kelas
-        ]);
+        //
     }
 
     /**
@@ -90,11 +80,9 @@ class MapelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mapel $mapel)
+    public function update(Request $request, $id)
     {
-        $mapel->update($request->all());
-
-        return redirect()->route('mapel.index')->with('success','mapel has been updated');
+        //
     }
 
     /**
@@ -103,9 +91,8 @@ class MapelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mapel $mapel)
+    public function destroy($id)
     {
-        $mapel->delete();
-        return redirect()->route('mapel.index')->with('success','mapel has been deleted');
+        //
     }
 }

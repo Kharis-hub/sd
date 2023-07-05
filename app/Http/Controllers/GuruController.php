@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Mapel\StoreMapelRequest;
-use App\Models\Kelas;
-use App\Models\Mapel;
+use App\Http\Requests\Guru\StoreGuruRequest;
+use App\Models\Guru;
 use Illuminate\Http\Request;
 
-class MapelController extends Controller
+class GuruController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +15,12 @@ class MapelController extends Controller
      */
     public function index()
     {
-        $title = "Mata Pelajaran";
-        $mapel = Mapel::paginate(10);
+        $title = "Guru";
+        $guru = Guru::all();
 
-        return view('admin.mapel.index', [
+        return view('admin.guru.index', [
             'title' => $title,
-            'mapel' => $mapel
+            'guru' => $guru
         ]);
     }
 
@@ -32,12 +31,10 @@ class MapelController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Mata Pelajaran";
-        $kelas = Kelas::all();
+        $title = "Tambah Guru";
 
-        return view('admin.mapel.create', [
+        return view('admin.guru.create', [
             'title' => $title,
-            'kelas' => $kelas
         ]);
     }
 
@@ -47,11 +44,24 @@ class MapelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMapelRequest $request)
+    public function store(StoreGuruRequest $request)
     {
-        Mapel::create($request->all());
+        $guru = Guru::create([
+            'card_id' => $request->card_id,
+            'card_type' => $request->card_type,
+            'nama' => $request->nama,
+            'jekel' => $request->jekel,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'agama' => $request->agama,
+            'mapel' => $request->mapel,
+            'alamat' => $request->alamat,
+            'kelas' => $request->kelas,
+            'image' => 'default.jpg',
+            'is_active' => true,
+        ]);
 
-        return redirect()->route('mapel.index')->with('success', 'mapel successfully created');
+        return redirect()->route('guru.index')->with('success', 'guru successfully created');
     }
 
     /**
@@ -71,16 +81,9 @@ class MapelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mapel $mapel)
+    public function edit($id)
     {
-        $title = "Edit Mapel";
-        $kelas = Kelas::all();
-
-        return view('admin.mapel.edit', [
-            'title' => $title,
-            'mapel' => $mapel,
-            'kelas' => $kelas
-        ]);
+        //
     }
 
     /**
@@ -90,11 +93,9 @@ class MapelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mapel $mapel)
+    public function update(Request $request, $id)
     {
-        $mapel->update($request->all());
-
-        return redirect()->route('mapel.index')->with('success','mapel has been updated');
+        //
     }
 
     /**
@@ -103,9 +104,8 @@ class MapelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mapel $mapel)
+    public function destroy($id)
     {
-        $mapel->delete();
-        return redirect()->route('mapel.index')->with('success','mapel has been deleted');
+        //
     }
 }
