@@ -107,7 +107,7 @@
                       </a>
                     </li>
                     <li class="nav-item ">
-                      <a class="nav-link " href="../../pages/applications/wizard.html">
+                      <a class="nav-link " href="">
                         <span class="sidenav-mini-icon"> S </span>
                         <span class="sidenav-normal"> Jadwal Mengajar </span>
                       </a>
@@ -139,13 +139,13 @@
                 <div class="collapse" id="manageMapel" style="">
                   <ul class="nav ms-4 ps-3">
                     <li class="nav-item ">
-                      <a class="nav-link " href="{{ route('mapel.index')}}">
+                      <a class="nav-link {{ request()->routeIs('mapel.*') ? 'active' : '' }}" href="{{ route('mapel.index')}}">
                         <span class="sidenav-mini-icon"> K </span>
                         <span class="sidenav-normal"> Mata Pelajaran </span>
                       </a>
                     </li>
                     <li class="nav-item ">
-                      <a class="nav-link " href="../../pages/applications/wizard.html">
+                        <a class="nav-link {{ request()->routeIs('jadwal.*') ? 'active' : '' }}" href="{{ route('jadwal.index')}}">
                         <span class="sidenav-mini-icon"> J </span>
                         <span class="sidenav-normal"> Jadwal Mapel </span>
                       </a>

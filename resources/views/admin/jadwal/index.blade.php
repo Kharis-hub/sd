@@ -36,14 +36,14 @@
                         <span class="text-secondary text-xs font-weight-bold">{{ $item->kelas}}</span>
                       </td>
                     <td class="align-middle">
-                      <a href="{{ route('siswa.edit', $item->id) }}" class="btn btn-sm bg-gradient-success" data-toggle="tooltip" data-original-title="Edit user">
+                      <a href="{{ route('siswa.edit', $item->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                         Edit
                       </a>
-                        <form id="delete_siswa" action="{{ route('siswa.destroy', $item->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Yakin hapus data ini ?');">
+                        <form id="delete_siswa" action="{{ route('siswa.destroy', $item) }}" method="POST" style="display: inline-block;">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <button type="submit" class="btn btn-sm bg-gradient-danger">Hapus
-                            </button>
+
+                            <a href="javascript: deleteSiswa()" class="text-danger font-weight-bold mr-2 text-xs">Hapus</a>
 
                         </form>
                     </td>
@@ -56,4 +56,13 @@
         </div>
       </div>
 </div>
+<script type="text/javascript">
+    function deleteSiswa() {
+        let text = "Apakah kamu yakin menghapus siswa ini ?";
+        if (confirm(text) == true) {
+            document.getElementById('delete_siswa').submit()
+        }
+
+     }
+</script>
 @endsection

@@ -25,7 +25,7 @@ class StoreSiswaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nis' => 'required',
+            'nis' => 'required|unique:siswa,nis',
             'nama' => 'required',
             'jekel' => 'required',
             'agama' => 'required',
@@ -33,6 +33,7 @@ class StoreSiswaRequest extends FormRequest
             'tanggal_lahir' => 'required',
             'kelas' => 'required',
             'tahun_masuk' => 'required',
+            'password' => 'required',
         ];
     }
 }

@@ -35,6 +35,7 @@ Route::group(['namespace' => 'App\Http\Controllers', 'middleware' => ['auth', 'v
     Route::resource('kelas', 'KelasController');
     Route::resource('mapel', 'MapelController');
     Route::resource('siswa', 'SiswaController');
+    Route::resource('jadwal', 'JadwalController');
 });
 
 

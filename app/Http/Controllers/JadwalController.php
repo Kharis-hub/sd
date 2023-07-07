@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Guru\StoreGuruRequest;
-use App\Models\Guru;
 use Illuminate\Http\Request;
 
-class GuruController extends Controller
+class JadwalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +13,7 @@ class GuruController extends Controller
      */
     public function index()
     {
-        $title = "Guru";
-        $guru = Guru::all();
-
-        return view('admin.guru.index', [
-            'title' => $title,
-            'guru' => $guru
-        ]);
+        //
     }
 
     /**
@@ -31,10 +23,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Guru";
-        return view('admin.guru.create', [
-            'title' => $title,
-        ]);
+        //
     }
 
     /**
@@ -43,24 +32,9 @@ class GuruController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreGuruRequest $request)
+    public function store(Request $request)
     {
-        $guru = Guru::create([
-            'card_id' => $request->card_id,
-            'card_type' => $request->card_type,
-            'nama' => $request->nama,
-            'jekel' => $request->jekel,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'agama' => $request->agama,
-            'mapel' => $request->mapel,
-            'alamat' => $request->alamat,
-            'kelas' => $request->kelas,
-            'image' => 'default.jpg',
-            'is_active' => true,
-        ]);
-
-        return redirect()->route('guru.index')->with('success', 'guru successfully created');
+        //
     }
 
     /**

@@ -109,7 +109,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                       <label for="alamat">Alamat</label>
-                      <textarea class="form-control" placeholder="Alamat" id="alamat" name="alamat">{{ $siswa->alamat}}</textarea>
+                      <textarea class="form-control" placeholder="Alamat" id="alamat">{{ $siswa->alamat}}</textarea>
                   </div>
                 </div>
 
@@ -130,18 +130,7 @@
                           </p>
                       @endif
                   </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group {{ $errors->has('password') ? 'has-danger' : '' }}">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" id="password" placeholder="password" value="{{old('password')}}">
-                        @if($errors->has('password'))
-                            <p class="small help-block text-danger">
-                                {{ $errors->first('password') }}
-                            </p>
-                        @endif
-                      </div>
-                </div>
+                  </div>
               </div>
             <button type="submit" class="btn bg-gradient-primary">Ubah</button>
           </form>

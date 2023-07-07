@@ -6,7 +6,9 @@ use App\Http\Requests\Siswa\StoreSiswaRequest;
 use App\Http\Requests\Siswa\UpdateSiswaRequest;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class SiswaController extends Controller
 {
@@ -50,7 +52,7 @@ class SiswaController extends Controller
      */
     public function store(StoreSiswaRequest $request)
     {
-        $guru = Siswa::create([
+        $siswa = Siswa::create([
             'nis' => $request->nis,
             'nama' => $request->nama,
             'jekel' => $request->jekel,
@@ -62,6 +64,14 @@ class SiswaController extends Controller
             'tahun_masuk' => $request->tahun_masuk,
             'image' => 'default.jpg',
             'is_active' => true,
+        ]);
+
+        $user = User::create([
+            'name' => $request->nama,
+            'username' => $request->nis,
+            'password' => Hash::make($request->password),
+            "role_id"=> 4,
+            "person_id"=> $siswa->id,
         ]);
 
         return redirect()->route('siswa.index')->with('success', 'siswa successfully created');
@@ -105,6 +115,19 @@ class SiswaController extends Controller
      */
     public function update(UpdateSiswaRequest $request, Siswa $siswa)
     {
+        $user = User::where('person_id', $siswa->id)->where('role_id', 4)->first();
+        if ($request->password == null) {
+            $user->update([
+                'name' => $request->nama,
+                'username' => $request->nis,
+            ]);
+        }else{
+            $user->update([
+                'name' => $request->nama,
+                'username' => $request->nis,
+                'password' => Hash::make($request->password),
+            ]);
+        }
         $siswa->update($request->all());
 
         return redirect()->route('siswa.index')->with('success','siswa has been updated');
@@ -119,6 +142,8 @@ class SiswaController extends Controller
     public function destroy(Siswa $siswa)
     {
         $siswa->delete();
+        $user = User::where('person_id', $siswa->id)->where('role_id', 4)->first();
+        $user->delete();
         return redirect()->route('siswa.index')->with('success','siswa has been deleted');
     }
 }

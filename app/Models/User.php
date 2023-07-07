@@ -10,7 +10,13 @@ class User extends Authenticatable
 {
     use HasFactory;
 
-
+    protected $fillable = [
+        'name',
+        'username',
+        'password',
+        "role_id",
+        "person_id"
+    ];
     public function guru() {
         return $this->belongsTo(Guru::class);
     }
